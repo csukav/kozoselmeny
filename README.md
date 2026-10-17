@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# közös
 
-## Getting Started
+Eseményfelfedező és -foglaló webalkalmazás Next.js App Routerrel, TypeScripttel,
+Prismával, SQLite-tal és Auth.js-szel.
 
-First, run the development server:
+## Helyi fejlesztés
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Telepítsd a függőségeket: `npm install`
+2. Másold le a környezeti változókat: `cp .env.example .env`
+3. Adj meg egy véletlenszerű `AUTH_SECRET` értéket a `.env` fájlban.
+4. Állítsd az `AUTH_URL` értékét a nyilvános alkalmazás-URL-re. Az
+   `AUTH_TRUST_HOST=true` értéket csak helyi fejlesztéshez vagy megbízható
+   reverse proxy mögötti telepítéshez használd.
+5. Opcionálisan állítsd be az `AUTH_GITHUB_ID` és `AUTH_GITHUB_SECRET`
+   változókat a GitHub OAuth alkalmazásodból. A helyi visszahívási URL:
+   `http://localhost:3000/api/auth/callback/github`.
+6. Hozd létre az adatbázist és a Prisma klienst:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   npm run db:generate
+   npm run db:push
+   npm run db:seed
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+7. Indítsd el az alkalmazást: `npm run dev`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Az OAuth-változók megadása nélkül az e-mail/jelszó regisztráció és belépés
+továbbra is használható. A seed hat bemutató eseményt és azok szervezőjét
+hozza létre; többször is biztonságosan futtatható.
 
-## Learn More
+## Elérhető funkciók
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Események keresése, kategória szerinti szűrése és részleteinek megtekintése.
+- Bejelentkezés és regisztráció e-mail/jelszóval vagy GitHub OAuth-fal.
+- Bejelentkezett felhasználóknak eseményszervezés és férőhely-foglalás.
+- Saját foglalások és események megtekintése az irányítópulton.
+- A `/api/events` végpont eseményeket listáz, bejelentkezett felhasználóknak
+  pedig validált eseménylétrehozást biztosít.
