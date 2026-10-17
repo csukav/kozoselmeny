@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { Prisma } from "@prisma/client";
+import type { Prisma } from "../generated/prisma/client";
 
 export const eventInclude = {
   organizer: { select: { name: true } },

@@ -1,8 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import { db } from "../lib/db";
 
-const prisma = new PrismaClient();
-
-function nextWeekday(weekday, hour, minute, weeksAhead = 0) {
+function nextWeekday(
+  weekday: number,
+  hour: number,
+  minute: number,
+  weeksAhead = 0,
+) {
   const date = new Date();
   const daysUntil = (weekday - date.getDay() + 7) % 7;
   date.setDate(date.getDate() + daysUntil + weeksAhead * 7);
@@ -99,14 +102,14 @@ const events = [
 ];
 
 async function main() {
-  const organizer = await prisma.user.upsert({
+  const organizer = await db.user.upsert({
     where: { email: "hello@kozosseg.hu" },
     update: {},
     create: { name: "Közösség szervezői", email: "hello@kozosseg.hu" },
   });
 
   for (const event of events) {
-    await prisma.event.upsert({
+    await db.event.upsert({
       where: { slug: event.slug },
       update: event,
       create: { ...event, organizerId: organizer.id },
@@ -120,5 +123,5 @@ main()
     process.exitCode = 1;
   })
   .finally(async () => {
-    await prisma.$disconnect();
+    await db.$disconnect();
   });

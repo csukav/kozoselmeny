@@ -1,12 +1,12 @@
 "use server";
 
-import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { createSlug } from "@/lib/events";
 import { bookingSchema, eventSchema } from "@/lib/validations/event";
+import { Prisma } from "../../generated/prisma/client";
 
 export type EventFormState = { error?: string } | undefined;
 
