@@ -4,19 +4,21 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "predev": "prisma generate",
+    "predev": "npx --yes prisma@7.10.1 generate --config prisma.orm.config.ts",
     "build": "next build",
-    "prebuild": "prisma generate",
+    "prebuild": "npx --yes prisma@7.10.1 generate --config prisma.orm.config.ts",
     "start": "next start",
     "lint": "eslint",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:seed": "prisma db seed"
+    "db:generate": "npx --yes prisma@7.10.1 generate --config prisma.orm.config.ts",
+    "db:push": "npx --yes prisma@7.10.1 db push --config prisma.orm.config.ts",
+    "db:seed": "npx --yes prisma@7.10.1 db seed --config prisma.orm.config.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",
     "@prisma/adapter-better-sqlite3": "^7.10.1",
     "@prisma/client": "^7.10.1",
+    "@prisma/composer": "^0.29.1",
+    "@prisma/composer-prisma-cloud": "^0.29.1",
     "bcryptjs": "^3.0.3",
     "dotenv": "^18.0.8",
     "next": "16.4.2",
@@ -32,7 +34,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
-    "prisma": "^7.10.1",
+    "prisma": "^8.0.0-rc.23",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5"
