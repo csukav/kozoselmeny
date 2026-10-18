@@ -8,7 +8,6 @@ import { signInSchema } from "@/lib/validations/auth";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(db),
-  trustHost: process.env.AUTH_TRUST_HOST === "true",
   session: { strategy: "jwt" },
   providers: [
     GitHub,
